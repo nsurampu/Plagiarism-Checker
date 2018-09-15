@@ -39,13 +39,13 @@ class ParseAndStore:
             pickle.dump(file_data,f)
         return True
 
-#     folder = 'D:\\studies\\3-1\\ir\\ir_project_1\\Plagiarism-Checker\\corpus-20090418\\'
+folder = 'D:\\studies\\3-1\\ir\\ir_project_1\\Plagiarism-Checker\\corpus-original\\'
 
 
-
-# files = os.listdir(folder)
-# if parseAndStore(folder,files):
-#     print('success')
+parse = ParseAndStore()
+files = os.listdir(folder)
+if parse.parseAndStore(folder,files):
+    print('success')
 
 
 # # read data
@@ -80,3 +80,4 @@ class TF_IDF:
         with open(path,'wb') as f:
             pickle.dump(tfidf,f)
         return path        
+        

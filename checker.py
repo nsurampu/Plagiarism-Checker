@@ -2,13 +2,13 @@ import nltk
 import os
 
 class Checker:
-    def plag_level(sents, words):
+    def plag_level(self,sents, words):
         sent_score = sents * 0.8
         word_score = words * 0.2
         score = sent_score + word_score
         return score
 
-    def plag_check(orig_doc, plag_doc):
+    def plag_check(self,orig_doc, plag_doc):
         orig_content = orig_doc.read()
         plag_content = plag_doc.read()
 
@@ -32,7 +32,7 @@ class Checker:
 
         word_percent = (len(plag_word_tokens) - word_match)
 
-        plag_score = plag_level(sent_percent, word_percent)
+        plag_score = self.plag_level(sent_percent, word_percent)
 
         uniqueness = 100 - ((word_match / len(plag_word_tokens)) * 100)
 

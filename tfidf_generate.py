@@ -27,3 +27,6 @@ class TF_IDF:
         with open(path,'wb') as f:
             pickle.dump(tfidf,f)
         return path        
+
+tf = TF_IDF()
+tf.tf_idf(os.getcwd()+'\\data.txt')        
