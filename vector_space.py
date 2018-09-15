@@ -15,7 +15,7 @@ for i in range(0, len(input_tokens)):
     else:
         input_freq[input_tokens[i]] = input_freq[input_tokens[i]] + 1
 
-scores = []
+scores = {}
 length = []
 
 corpus_path = "D:/Plagiarism-Checker/corpus-original"
@@ -29,8 +29,6 @@ for i in range(0, len(corpus)):
     length.append(len(doc_tokens))
     doc_file.close()
 
-print(length)
-
 tfidf_file = open("D:/Plagiarism-Checker/tfidf.py")
 tfidf_scores = tfidf.read()
 
@@ -41,4 +39,9 @@ for i in range(0, len(input_freq)):
 for i in range(0, len(scores)):
     scores[i] = scores[i] / length[i]
 
-top_docs = score[0:10]
+top_docs -> docs with top 10 scores
+
+checker_obj = Checker()
+
+for i in range(0, len(top_docs)):
+    checker.plag_check(top_docs[i] ,input_file)
