@@ -5,12 +5,6 @@ from nltk.stem import PorterStemmer
 import os
 import pickle
 
-# stop_words = stopwords.words('english')
-# tokenizer = RegexpTokenizer(r'\w+')
-# tokens = tokenizer.tokenize("hello, my name's percy")
-# print(tokens)
-# filtered = [w for w in tokens if w not in stop_words]
-# print(filtered)
 
 stop_words = stopwords.words('english')
 tokenizer = RegexpTokenizer(r'\w+')
@@ -41,7 +35,7 @@ def parseAndStore(folder, files):
         file_data[file] = data_with_tf
 
     cwd = os.getcwd()
-    with open(cwd+'\\' + 'hello.txt','wb') as f:
+    with open(cwd+'\\' + 'data.txt','wb') as f:
         pickle.dump(file_data,f)
     return True
 
@@ -49,15 +43,21 @@ def parseAndStore(folder, files):
 
 
 
+<<<<<<< HEAD
 folder = 'D:\\studies\\3-1\\ir\\ir_project_1\\corpus-original\\'
+=======
+folder = 'D:\\studies\\3-1\\ir\\ir_project_1\\Plagiarism-Checker\\corpus-20090418\\'
+>>>>>>> efef2ee08f74957b6c32a651b75e175d43f6fe40
 
 
 
 files = os.listdir(folder)
 if parseAndStore(folder,files):
     print('success')
+
+
 # read data
-with open(os.getcwd() +'\\' + 'hello.txt','rb') as f:
+with open(os.getcwd() +'\\' + 'data.txt','rb') as f:
         data = pickle.load(f)
         keys = data.keys()
         for key in keys:
