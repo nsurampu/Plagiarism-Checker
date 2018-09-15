@@ -1,4 +1,4 @@
-import nltk 
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 from nltk.stem import PorterStemmer
@@ -39,17 +39,17 @@ def parseAndStore(folder, files):
                 data_with_tf[keys[i]] = filtered.count(keys[i])
             # print(data_with_tf)
         file_data[file] = data_with_tf
-        
+
     cwd = os.getcwd()
     with open(cwd+'\\' + 'hello.txt','wb') as f:
         pickle.dump(file_data,f)
     return True
 
-     
-    
 
 
-folder = 'D:\\studies\\3-1\\ir\\ir_project_1\\corpus-20090418\\'
+
+
+folder = 'D:\\studies\\3-1\\ir\\ir_project_1\\corpus-original\\'
 
 
 
