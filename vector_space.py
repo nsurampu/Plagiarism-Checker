@@ -29,19 +29,34 @@ for i in range(0, len(corpus)):
     length.append(len(doc_tokens))
     doc_file.close()
 
-tfidf_file = open("D:/Plagiarism-Checker/tfidf.py")
-tfidf_scores = tfidf.read()
+data_pickle = open('data.txt', 'rb')
+data_dict = pickle.load(data_pickle)
+data_keys = data_dict.keys()
 
-for i in range(0, len(input_freq)):
-    for j in range(0, len(tfidf_scores)):
-        scores[i] = scores[i] + tfidf[j]
+tfidf_pickle = open('tfidf.txt', 'rb')
+tfidf_dict = pickle.load(tfidf_pickle)
+tfidf_keys = tfidf_dict.keys()
+
+for i in range(0, len(input_tokens)):
+    for j in range(0, len(data_dict):
+        doc = data_keys[j]
+        scores[doc] = 0
+        temp_term = data_dict[doc]
+        term_keys = temp_term.keys()
+        for k in range(0, len(term_keys)):
+            tfidf = tfidf_dict[(term_keys[k], doc)]
+            scores[doc] = scores[doc] + (tfidf * input_freq[input_tokens[i]])
 
 for i in range(0, len(scores)):
     scores[i] = scores[i] / length[i]
 
-top_docs -> docs with top 10 scores
+sorted_scores = [(t, scores[t]) for t in sorted(scores, key=scores.get, reverse=True)]
+
+top_doc_scores = sorted_scores[1:10]
+top_docs = top_doc_scores.keys()
 
 checker_obj = Checker()
 
 for i in range(0, len(top_docs)):
-    checker.plag_check(top_docs[i] ,input_file)
+    top_doc_path = "D:/Plagiarism-Checker/corpus-original/" + top_docs[i]
+    checker.plag_check(top_doc_path ,file_path)
