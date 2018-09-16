@@ -1,6 +1,7 @@
 import nltk
 import os
 import pickle
+import checker
 
 
 file_path = input("Enter path of file: ")
@@ -74,7 +75,8 @@ for sorted_score in sorted_score_keys:
         break
 # top_docs = top_doc_scores.keys()
 
-checker_obj = Checker()
+checker_obj = checker.Checker()
+
 for i in range(0, len(top_docs)):
     top_doc_path = "D:/Plagiarism-Checker/corpus-original/" + top_docs[i]
     checker_obj.plag_check(top_doc_path ,file_path)
