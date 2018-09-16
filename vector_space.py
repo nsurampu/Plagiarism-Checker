@@ -56,21 +56,19 @@ for i in range(0, len(input_tokens)):
         temp_term = data_dict[doc]
         term_keys = temp_term.keys()
         for term_key in tfidf_keys:
-            tfidf = tfidf_dict[term_key ]
-            scores[doc] = scores[doc] + (tfidf * input_freq[input_tokens[i]])
+            tfidf = tfidf_dict[term_key]
+            if term_key[0] in input_tokens:
+                scores[doc] = scores[doc] + (tfidf * input_freq[term_key[0]])
 
 
 score_keys = scores.keys()
 i = 0
 
-print("Normalizing scores...")
 for score_key in score_keys:
     scores[score_key] = scores[score_key] / length[i]
     i += 1
 
 sorted_scores = {t: scores[t] for t in sorted(scores, key=scores.get, reverse=True)}
-
-# print(sorted_scores)
 sorted_score_keys = sorted_scores.keys()
 count = 0
 top_docs = []
@@ -80,9 +78,8 @@ for sorted_score in sorted_score_keys:
     top_doc_scores = sorted_scores[sorted_score]
     top_docs.append(sorted_score)
     count += 1
-    if count == 10:
+    if count == 3:
         break
-# top_docs = top_doc_scores.keys()
 
 checker_obj = checker.Checker()
 
