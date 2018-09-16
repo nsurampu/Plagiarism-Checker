@@ -2,7 +2,7 @@ import nltk
 import os
 
 class Checker:
-    def plag_level(self,sents, words):
+    def plag_score(self,sents, words):
         sent_score = sents * 0.8
         word_score = words * 0.2
         score = sent_score + word_score
@@ -38,13 +38,14 @@ class Checker:
 
         word_percent = (len(plag_word_tokens) - word_match)
 
-        plag_score = self.plag_level(sent_percent, word_percent)
+        score = self.plag_score(sent_percent, word_percent)
 
         uniqueness = 100 - ((word_match / len(plag_word_tokens)) * 100)
+        uniqueness = float(uniqueness)
 
-        print("\nPlagiarism check results:")
+        print("Document compared with: " + orig_file.split('/')[-1])
         print("Uniqness: " + str(uniqueness) + "%")
-        print("Plagiarism score: " + str(plag_score))
+        print("Plagiarism score: " + str(score))
         print("\n")
 
         orig_doc.close()
