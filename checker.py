@@ -8,9 +8,15 @@ class Checker:
         score = sent_score + word_score
         return score
 
-    def plag_check(self,orig_doc, plag_doc):
+    def plag_check(self,orig_file, plag_file):
+        orig_doc = open(orig_file, 'rb')
+        plag_doc = open(plag_file, 'rb')
         orig_content = orig_doc.read()
         plag_content = plag_doc.read()
+        orig_content.decode('utf-8', 'ignore')
+        plag_content.decode('utf-8', 'ignore')
+        orig_content = str(orig_content)
+        plag_content = str(plag_content)
 
         orig_word_tokens = nltk.word_tokenize(orig_content)
         plag_word_tokens = nltk.word_tokenize(plag_content)
@@ -40,3 +46,6 @@ class Checker:
         print("Uniqness: " + str(uniqueness) + "%")
         print("Plagiarism score: " + str(plag_score))
         print("\n")
+
+        orig_doc.close()
+        plag_doc.close()

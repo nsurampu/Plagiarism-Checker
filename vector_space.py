@@ -23,11 +23,11 @@ for i in range(0, len(input_tokens)):
 scores = {}
 length = []
 
-corpus_path = "D:\\studies\\3-1\\ir\\ir_project_1\\Plagiarism-Checker\\corpus-original"
+corpus_path = "D:/Plagiarism-Checker/corpus-original"
 corpus = os.listdir(corpus_path)
 
 for i in range(0, len(corpus)):
-    doc_path = corpus_path + "\\" + corpus[i]
+    doc_path = corpus_path + "/" + corpus[i]
     doc_file = open(doc_path,'rb')
     doc_content = doc_file.read()
     doc_content.decode('utf-8','ignore')
@@ -53,8 +53,7 @@ for i in range(0, len(input_tokens)):
             tfidf = tfidf_dict[term_key ]
             scores[doc] = scores[doc] + (tfidf * input_freq[input_tokens[i]])
 
-print(len(scores))
-print(len(length))
+
 score_keys = scores.keys()
 i = 0
 for score_key in score_keys:
