@@ -39,7 +39,7 @@ class ParseAndStore:
             pickle.dump(file_data,f)
         return True
 
-folder = 'D:\\studies\\3-1\\ir\\ir_project_1\\Plagiarism-Checker\\corpus-original\\'
+folder = 'D:\\Plagiarism-Checker\\corpus-original\\'
 
 
 parse = ParseAndStore()
@@ -72,12 +72,11 @@ class TF_IDF:
                         df += 1
                 val = tf * math.log((N // df),10)
                 tfidf[(term,doc)] = val
-                # (term,document) is the key 
+                # (term,document) is the key
 
         # print(tfidf)
         cwd = os.getcwd()
         path = cwd+'\\' + 'tfidf.txt'
         with open(path,'wb') as f:
             pickle.dump(tfidf,f)
-        return path        
-        
+        return path

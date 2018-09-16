@@ -43,10 +43,16 @@ class Checker:
         orig_content = str(orig_content)
         plag_content = str(plag_content)
 
-        orig_word_tokens = nltk.word_tokenize(orig_content)
-        plag_word_tokens = nltk.word_tokenize(plag_content)
+        '''orig_word_tokens = nltk.word_tokenize(orig_content)
+        plag_word_tokens = nltk.word_tokenize(plag_content)'''
         orig_sent_tokens = nltk.sent_tokenize(orig_content)
         plag_sent_tokens = nltk.sent_tokenize(plag_content)
+
+        orig_word_tokens = tokenizer.tokenize(orig_content)
+        plag_word_tokens = tokenizer.tokenize(plag_content)
+
+        filtered_orig = [word for word in orig_word_tokens if word not in stop_words]
+        filtered_plag = [word for word in plag_word_tokens if word not in stop_words]
 
         word_match = 0  # for uniqueness
         sent_match = 0  # for plagiarism score
@@ -56,9 +62,6 @@ class Checker:
                 sent_match = sent_match + 1
 
         sent_percent = (len(plag_sent_tokens) - sent_match)  # zero score implies highest plagiarism
-
-        filtered_orig = [word for word in orig_word_tokens if word not in stop_words]
-        filtered_plag = [word for word in plag_word_tokens if word not in stop_words]
 
         for i in range(0, len(filtered_plag)):
             if filtered_plag[i] in filtered_orig:

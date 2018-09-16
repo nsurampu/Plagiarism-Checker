@@ -2,25 +2,32 @@ import nltk
 import os
 import pickle
 import checker
+from nltk.corpus import stopwords
+from nltk.tokenize import RegexpTokenizer
 
+stop_words = stopwords.words('english')
+tokenizer = RegexpTokenizer(r'\w+')
 
 file_path = input("Enter path of file: ")
 
 print("Reading file and tokenizing...")
-with open(file_path,'rb') as input_file:
-    input_data = input_file.read()
-    input_data.decode('utf-8','ignore')
-    input_data = str(input_data)
-    input_tokens = nltk.word_tokenize(input_data)
+input_file = open(file_path,'rb')
+input_data = input_file.read()
+input_data.decode('utf-8','ignore')
+input_data = str(input_data)
+#input_tokens = nltk.word_tokenize(input_data)
+input_tokens = tokenizer.tokenize(input_data)
 
 input_freq = {}
 
+filtered_input = [word for word in input_tokens if word not in stop_words]
+
 print("Calculating term frequencies...")
-for i in range(0, len(input_tokens)):
-    if input_tokens[i] not in input_freq:
-        input_freq[input_tokens[i]] = 1
+for i in range(0, len(filtered_input)):
+    if filtered_input[i] not in input_freq:
+        input_freq[filtered_input[i]] = 1
     else:
-        input_freq[input_tokens[i]] = input_freq[input_tokens[i]] + 1
+        input_freq[filtered_input[i]] = input_freq[filtered_input[i]] + 1
 
 scores = {}
 length = []
@@ -55,10 +62,10 @@ for doc in data_keys:
     scores[doc] = 0
     temp_term = data_dict[doc]
     term_keys = temp_term.keys()
-    for term_key in tfidf_keys:
-        tfidf = tfidf_dict[term_key]
-        if term_key[0] in input_tokens:
-            scores[doc] = scores[doc] + (tfidf * input_freq[term_key[0]])
+    for term_key in term_keys:
+        tfidf = tfidf_dict[(term_key, doc)]
+        if term_key in filtered_input:
+            scores[doc] = scores[doc] + (tfidf * input_freq[term_key])
 
 
 score_keys = scores.keys()
@@ -73,12 +80,14 @@ sorted_score_keys = sorted_scores.keys()
 count = 0
 top_docs = []
 
+print(sorted_scores)
+
 print("Fetching top 10 matching documents...")
 for sorted_score in sorted_score_keys:
     top_doc_scores = sorted_scores[sorted_score]
     top_docs.append(sorted_score)
     count += 1
-    if count == 3:
+    if count == 10:
         break
 
 checker_obj = checker.Checker()

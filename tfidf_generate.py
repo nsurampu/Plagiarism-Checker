@@ -1,6 +1,6 @@
 import math
-import pickle 
-import os 
+import pickle
+import os
 
 class TF_IDF:
     def tf_idf(self,file_path):
@@ -19,14 +19,14 @@ class TF_IDF:
                         df += 1
                 val = tf * math.log((N // df),10)
                 tfidf[(term,doc)] = val
-                # (term,document) is the key 
+                # (term,document) is the key
 
         # print(tfidf)
         cwd = os.getcwd()
         path = cwd+'\\' + 'tfidf.txt'
         with open(path,'wb') as f:
             pickle.dump(tfidf,f)
-        return path        
+        return path
 
 tf = TF_IDF()
-tf.tf_idf(os.getcwd()+'\\data.txt')        
+tf.tf_idf(os.getcwd()+'\\data.txt')
