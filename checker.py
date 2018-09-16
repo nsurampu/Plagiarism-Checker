@@ -4,14 +4,33 @@ from nltk.tokenize import RegexpTokenizer
 import os
 
 class Checker:
-    def plag_score(self,sents, words):
-        sent_score = sents * 0.6
-        word_score = words * 0.4
+    def sigmoid(self, x):
+        value = 1 / (1 + (2.71)**(-x))
+        return value
+
+    def plag_score(self, sents, words):
+        sent_score = sents * 0.7
+        word_score = words * 0.3
         score = sent_score + word_score
         score = float(score)
         return score
 
-    def plag_check(self,orig_file, plag_file):
+    def plag_level(self, score):
+        level = round(score, 1)
+        if(level == 0.5):
+            return 5
+        elif(level == 0.6):
+            return 4
+        elif(level == 0.7):
+            return 3
+        elif(level == 0.8):
+            return 2
+        elif(level == 0.9):
+            return 1
+        else:
+            return 0
+
+    def plag_check(self, orig_file, plag_file):
         stop_words = stopwords.words('english')
         tokenizer = RegexpTokenizer(r'\w+')
 
@@ -53,13 +72,16 @@ class Checker:
         sent_percent = sent_percent / len(orig_sent_tokens)
         word_percent = word_percent / len(filtered_orig)
         score = self.plag_score(sent_percent, word_percent)
+        sig_score = self.sigmoid(score)
+        level = self.plag_level(sig_score)
 
         print("Document compared with: " + orig_file.split('/')[-1])
         print("Sentences matching: " + str(sent_match))
         print("Words matching: " + str(word_match))
         print("Uniqueness: " + str(uniqueness) + "%")
         print("Plagiarism score: " + str(score))
-        print("\n")
+        print("Sigmoid score: " + str(sig_score))
+        print("Plagiarism level: " + str(level))
 
         orig_doc.close()
         plag_doc.close()

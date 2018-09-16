@@ -88,7 +88,10 @@ checker_obj = checker.Checker()
 
 print("\nPlagiarism Results:\n")
 print("Document being checked: " + file_path.split('/')[-1])
-print("\n")
+
 for i in range(0, len(top_docs)):
+    input("\nPress enter to continue...")
     top_doc_path = "D:/Plagiarism-Checker/corpus-original/" + top_docs[i]
     checker_obj.plag_check(top_doc_path ,file_path)
+
+print("\nEnd of result")
