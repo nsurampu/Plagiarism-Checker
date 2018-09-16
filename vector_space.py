@@ -6,6 +6,7 @@ import checker
 
 file_path = input("Enter path of file: ")
 
+print("Reading file and tokenizing...")
 with open(file_path,'rb') as input_file:
     input_data = input_file.read()
     input_data.decode('utf-8','ignore')
@@ -14,6 +15,7 @@ with open(file_path,'rb') as input_file:
 
 input_freq = {}
 
+print("Calculating term frequencies...")
 for i in range(0, len(input_tokens)):
     if input_tokens[i] not in input_freq:
         input_freq[input_tokens[i]] = 1
@@ -26,6 +28,7 @@ length = []
 corpus_path = "D:/Plagiarism-Checker/corpus-original"
 corpus = os.listdir(corpus_path)
 
+print("Calculating lengths of corpus documents...")
 for i in range(0, len(corpus)):
     doc_path = corpus_path + "/" + corpus[i]
     doc_file = open(doc_path,'rb')
@@ -36,14 +39,17 @@ for i in range(0, len(corpus)):
     length.append(len(doc_tokens))
     doc_file.close()
 
+print("Unpickling tokenized corpus data...")
 data_pickle = open('data.txt', 'rb')
 data_dict = pickle.load(data_pickle)
 data_keys = data_dict.keys()
 
+print("Unpickling tf-idf data...")
 tfidf_pickle = open('tfidf.txt', 'rb')
 tfidf_dict = pickle.load(tfidf_pickle)
 tfidf_keys = tfidf_dict.keys()
 
+print("Calculating document scores...")
 for i in range(0, len(input_tokens)):
     for doc in data_keys:
         scores[doc] = 0
@@ -56,6 +62,8 @@ for i in range(0, len(input_tokens)):
 
 score_keys = scores.keys()
 i = 0
+
+print("Normalizing scores...")
 for score_key in score_keys:
     scores[score_key] = scores[score_key] / length[i]
     i += 1
@@ -66,6 +74,8 @@ sorted_scores = {t: scores[t] for t in sorted(scores, key=scores.get, reverse=Tr
 sorted_score_keys = sorted_scores.keys()
 count = 0
 top_docs = []
+
+print("Fetching top 10 matching documents...")
 for sorted_score in sorted_score_keys:
     top_doc_scores = sorted_scores[sorted_score]
     top_docs.append(sorted_score)

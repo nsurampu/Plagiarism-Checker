@@ -5,15 +5,16 @@ import os
 
 class Checker:
     def plag_score(self,sents, words):
-        sent_score = sents * 0.8
-        word_score = words * 0.2
+        sent_score = sents * 0.6
+        word_score = words * 0.4
         score = sent_score + word_score
+        score = float(score)
         return score
 
     def plag_check(self,orig_file, plag_file):
         stop_words = stopwords.words('english')
         tokenizer = RegexpTokenizer(r'\w+')
-        
+
         orig_doc = open(orig_file, 'rb')
         plag_doc = open(plag_file, 'rb')
         orig_content = orig_doc.read()
@@ -46,13 +47,17 @@ class Checker:
 
         word_percent = (len(filtered_plag) - word_match)
 
-        score = self.plag_score(sent_percent, word_percent)
-
         uniqueness = 100 - ((word_match / len(filtered_plag)) * 100)
         uniqueness = float(uniqueness)
 
+        sent_percent = sent_percent / len(orig_sent_tokens)
+        word_percent = word_percent / len(filtered_orig)
+        score = self.plag_score(sent_percent, word_percent)
+
         print("Document compared with: " + orig_file.split('/')[-1])
-        print("Uniqness: " + str(uniqueness) + "%")
+        print("Sentences matching: " + str(sent_match))
+        print("Words matching: " + str(word_match))
+        print("Uniqueness: " + str(uniqueness) + "%")
         print("Plagiarism score: " + str(score))
         print("\n")
 
