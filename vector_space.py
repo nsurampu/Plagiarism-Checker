@@ -80,14 +80,12 @@ sorted_score_keys = sorted_scores.keys()
 count = 0
 top_docs = []
 
-print(sorted_scores)
-
-print("Fetching top 10 matching documents...")
+print("Fetching top 5 matching documents...")
 for sorted_score in sorted_score_keys:
     top_doc_scores = sorted_scores[sorted_score]
     top_docs.append(sorted_score)
     count += 1
-    if count == 10:
+    if count == 5:
         break
 
 checker_obj = checker.Checker()
