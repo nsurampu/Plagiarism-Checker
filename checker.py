@@ -1,4 +1,6 @@
 import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import RegexpTokenizer
 import os
 
 class Checker:
@@ -9,6 +11,9 @@ class Checker:
         return score
 
     def plag_check(self,orig_file, plag_file):
+        stop_words = stopwords.words('english')
+        tokenizer = RegexpTokenizer(r'\w+')
+        
         orig_doc = open(orig_file, 'rb')
         plag_doc = open(plag_file, 'rb')
         orig_content = orig_doc.read()
@@ -32,15 +37,18 @@ class Checker:
 
         sent_percent = (len(plag_sent_tokens) - sent_match)  # zero score implies highest plagiarism
 
-        for i in range(0, len(plag_word_tokens)):
-            if plag_word_tokens[i] in orig_word_tokens:
+        filtered_orig = [word for word in orig_word_tokens if word not in stop_words]
+        filtered_plag = [word for word in plag_word_tokens if word not in stop_words]
+
+        for i in range(0, len(filtered_plag)):
+            if filtered_plag[i] in filtered_orig:
                 word_match = word_match + 1
 
-        word_percent = (len(plag_word_tokens) - word_match)
+        word_percent = (len(filtered_plag) - word_match)
 
         score = self.plag_score(sent_percent, word_percent)
 
-        uniqueness = 100 - ((word_match / len(plag_word_tokens)) * 100)
+        uniqueness = 100 - ((word_match / len(filtered_plag)) * 100)
         uniqueness = float(uniqueness)
 
         print("Document compared with: " + orig_file.split('/')[-1])
