@@ -50,15 +50,15 @@ tfidf_dict = pickle.load(tfidf_pickle)
 tfidf_keys = tfidf_dict.keys()
 
 print("Calculating document scores...")
-for i in range(0, len(input_tokens)):
-    for doc in data_keys:
-        scores[doc] = 0
-        temp_term = data_dict[doc]
-        term_keys = temp_term.keys()
-        for term_key in tfidf_keys:
-            tfidf = tfidf_dict[term_key]
-            if term_key[0] in input_tokens:
-                scores[doc] = scores[doc] + (tfidf * input_freq[term_key[0]])
+
+for doc in data_keys:
+    scores[doc] = 0
+    temp_term = data_dict[doc]
+    term_keys = temp_term.keys()
+    for term_key in tfidf_keys:
+        tfidf = tfidf_dict[term_key]
+        if term_key[0] in input_tokens:
+            scores[doc] = scores[doc] + (tfidf * input_freq[term_key[0]])
 
 
 score_keys = scores.keys()
