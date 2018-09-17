@@ -3,10 +3,19 @@ from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 import os
 
+"""The Checker class, which implements various methods used for chceking the plagiarism
+statistics of a passed file against another given file."""
+
 class Checker:
+    """This function calculates the sigmoid score using the original score. This is used
+    for determining the level of plagiarism of the document passed."""
+
     def sigmoid(self, x):
         value = 1 / (1 + (2.71)**(-x))
         return value
+
+    """This function calculates a score given the number of matching words and sentences,
+    assigning higher weightage to sentences than words."""
 
     def plag_score(self, sents, words):
         sent_score = sents * 0.7
@@ -14,6 +23,7 @@ class Checker:
         score = sent_score + word_score
         score = float(score)
         return score
+    """This function takes the sigmoid score of the document and assigns a level accordingly"""
 
     def plag_level(self, score):
         level = round(score, 1)
@@ -29,6 +39,11 @@ class Checker:
             return 1
         else:
             return 0
+
+    """The main function of the checker program. This function processes the two input documents-
+    original and plagiarised, and then checks for the number of matching words and sentences after
+    eliminating stop words. It then calculates the uniqueness, plagiarism score and plagiarism
+    level of the give document and prints the result."""
 
     def plag_check(self, orig_file, plag_file):
         stop_words = stopwords.words('english')
