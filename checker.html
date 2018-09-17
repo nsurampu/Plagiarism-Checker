@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module checker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>checker</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:d%3A%5Cplagiarism-checker%5Cchecker.py">d:\plagiarism-checker\checker.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="nltk.html">nltk</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="checker.html#Checker">Checker</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Checker">class <strong>Checker</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Checker-plag_check"><strong>plag_check</strong></a>(self, orig_file, plag_file)</dt><dd><tt>The&nbsp;main&nbsp;function&nbsp;of&nbsp;the&nbsp;checker&nbsp;program.&nbsp;This&nbsp;function&nbsp;processes&nbsp;the&nbsp;two&nbsp;input&nbsp;documents-<br>
+original&nbsp;and&nbsp;plagiarised,&nbsp;and&nbsp;then&nbsp;checks&nbsp;for&nbsp;the&nbsp;number&nbsp;of&nbsp;matching&nbsp;words&nbsp;and&nbsp;sentences&nbsp;after<br>
+eliminating&nbsp;stop&nbsp;words.&nbsp;It&nbsp;then&nbsp;calculates&nbsp;the&nbsp;uniqueness,&nbsp;plagiarism&nbsp;score&nbsp;and&nbsp;plagiarism<br>
+level&nbsp;of&nbsp;the&nbsp;give&nbsp;document&nbsp;and&nbsp;prints&nbsp;the&nbsp;result.<br>
+&nbsp;<br>
+@type&nbsp;&nbsp;orig_file:&nbsp;string<br>
+@param&nbsp;orig_file:&nbsp;the&nbsp;path&nbsp;of&nbsp;the&nbsp;original&nbsp;file&nbsp;against&nbsp;which&nbsp;we&nbsp;will&nbsp;be&nbsp;comparing&nbsp;the&nbsp;plagiarised&nbsp;document.<br>
+@type&nbsp;&nbsp;plag_file:&nbsp;string<br>
+@param&nbsp;orig_file:&nbsp;the&nbsp;path&nbsp;of&nbsp;the&nbsp;plagiarised&nbsp;file&nbsp;which&nbsp;we&nbsp;will&nbsp;be&nbsp;comparing.</tt></dd></dl>
+
+<dl><dt><a name="Checker-plag_level"><strong>plag_level</strong></a>(self, score)</dt><dd><tt>This&nbsp;function&nbsp;takes&nbsp;the&nbsp;sigmoid&nbsp;score&nbsp;of&nbsp;the&nbsp;document&nbsp;and&nbsp;assigns&nbsp;a&nbsp;level&nbsp;accordingly<br>
+&nbsp;<br>
+@type&nbsp;&nbsp;score:&nbsp;number<br>
+@param&nbsp;score:&nbsp;the&nbsp;sigmoid&nbsp;score&nbsp;of&nbsp;the&nbsp;document.<br>
+@rtype:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number<br>
+@return:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;number&nbsp;indicating&nbsp;the&nbsp;level&nbsp;of&nbsp;plagiarism&nbsp;on&nbsp;a&nbsp;scale&nbsp;of&nbsp;0-5,&nbsp;with&nbsp;5&nbsp;being&nbsp;highest.</tt></dd></dl>
+
+<dl><dt><a name="Checker-plag_score"><strong>plag_score</strong></a>(self, sents, words)</dt><dd><tt>This&nbsp;function&nbsp;calculates&nbsp;a&nbsp;score&nbsp;given&nbsp;the&nbsp;number&nbsp;of&nbsp;matching&nbsp;words&nbsp;and&nbsp;sentences,<br>
+assigning&nbsp;higher&nbsp;weightage&nbsp;to&nbsp;sentences&nbsp;than&nbsp;words.<br>
+&nbsp;<br>
+@type&nbsp;&nbsp;sents:&nbsp;number<br>
+@param&nbsp;sents:&nbsp;the&nbsp;number&nbsp;of&nbsp;matching&nbsp;sentences&nbsp;in&nbsp;plagiarised&nbsp;document.<br>
+@type&nbsp;&nbsp;words:&nbsp;number<br>
+@param&nbsp;words:&nbsp;the&nbsp;number&nbsp;of&nbsp;matching&nbsp;words&nbsp;in&nbsp;plagiarised&nbsp;document.<br>
+@rtype:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number<br>
+@return:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;plagiarism&nbsp;score&nbsp;calculated&nbsp;according&nbsp;to&nbsp;the&nbsp;number&nbsp;of&nbsp;matching&nbsp;words&nbsp;and&nbsp;sentences.</tt></dd></dl>
+
+<dl><dt><a name="Checker-sigmoid"><strong>sigmoid</strong></a>(self, x)</dt><dd><tt>This&nbsp;function&nbsp;calculates&nbsp;the&nbsp;sigmoid&nbsp;score&nbsp;using&nbsp;the&nbsp;original&nbsp;score.&nbsp;This&nbsp;is&nbsp;used<br>
+for&nbsp;determining&nbsp;the&nbsp;level&nbsp;of&nbsp;plagiarism&nbsp;of&nbsp;the&nbsp;document&nbsp;passed.<br>
+&nbsp;<br>
+@type&nbsp;&nbsp;x:&nbsp;number<br>
+@param&nbsp;x:&nbsp;original&nbsp;calculated&nbsp;score.<br>
+@rtype:&nbsp;&nbsp;&nbsp;number<br>
+@return:&nbsp;&nbsp;the&nbsp;sigmoid&nbsp;value&nbsp;of&nbsp;the&nbsp;original&nbsp;score.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>stopwords</strong> = &lt;WordListCorpusReader in '.../corpora/stopwords' (not loaded yet)&gt;</td></tr></table>
+</body></html>
