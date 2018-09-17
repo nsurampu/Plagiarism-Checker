@@ -8,7 +8,7 @@ from nltk.tokenize import RegexpTokenizer
 """This script implements the vector space of the corpus and uses the tf-idf model for calculating the cosine
 similarity of the documents in the corpus."""
 
-#Used for eliminating stop words using regex
+# Used for eliminating stop words using regex
 stop_words = stopwords.words('english')
 tokenizer = RegexpTokenizer(r'\w+')
 
@@ -19,7 +19,6 @@ input_file = open(file_path,'rb')
 input_data = input_file.read()
 input_data.decode('utf-8','ignore')
 input_data = str(input_data)
-#input_tokens = nltk.word_tokenize(input_data)
 input_tokens = tokenizer.tokenize(input_data)
 
 input_freq = {}
