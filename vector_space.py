@@ -5,8 +5,10 @@ import checker
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 
-"""This script implements the vector space of the corpus and uses the tf-idf model for calculating the cosine
-similarity of the documents in the corpus."""
+"""
+This script implements the vector space of the corpus and uses the tf-idf model for calculating the cosine
+similarity of the documents in the corpus.
+"""
 
 # Used for eliminating stop words using regex
 stop_words = stopwords.words('english')

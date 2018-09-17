@@ -6,26 +6,49 @@ import os
 """The Checker class, which implements various methods used for chceking the plagiarism
 statistics of a passed file against another given file."""
 
+
 class Checker:
-    """This function calculates the sigmoid score using the original score. This is used
-    for determining the level of plagiarism of the document passed."""
 
     def sigmoid(self, x):
+        """
+        This function calculates the sigmoid score using the original score. This is used
+        for determining the level of plagiarism of the document passed.
+
+        @type  x: number
+        @param x: original calculated score.
+        @rtype:   number
+        @return:  the sigmoid value of the original score.
+        """
         value = 1 / (1 + (2.71)**(-x))
         return value
 
-    """This function calculates a score given the number of matching words and sentences,
-    assigning higher weightage to sentences than words."""
-
     def plag_score(self, sents, words):
+        """
+        This function calculates a score given the number of matching words and sentences,
+        assigning higher weightage to sentences than words.
+
+        @type  sents: number
+        @param sents: the number of matching sentences in plagiarised document.
+        @type  words: number
+        @param words: the number of matching words in plagiarised document.
+        @rtype:       number
+        @return:      the plagiarism score calculated according to the number of matching words and sentences.
+        """
         sent_score = sents * 0.7
         word_score = words * 0.3
         score = sent_score + word_score
         score = float(score)
         return score
-    """This function takes the sigmoid score of the document and assigns a level accordingly"""
 
     def plag_level(self, score):
+        """
+        This function takes the sigmoid score of the document and assigns a level accordingly
+
+        @type  score: number
+        @param score: the sigmoid score of the document.
+        @rtype:       number
+        @return:      a number indicating the level of plagiarism on a scale of 0-5, with 5 being highest.
+        """
         level = round(score, 1)
         if(level == 0.5):
             return 5
@@ -40,12 +63,18 @@ class Checker:
         else:
             return 0
 
-    """The main function of the checker program. This function processes the two input documents-
-    original and plagiarised, and then checks for the number of matching words and sentences after
-    eliminating stop words. It then calculates the uniqueness, plagiarism score and plagiarism
-    level of the give document and prints the result."""
-
     def plag_check(self, orig_file, plag_file):
+        """
+        The main function of the checker program. This function processes the two input documents-
+        original and plagiarised, and then checks for the number of matching words and sentences after
+        eliminating stop words. It then calculates the uniqueness, plagiarism score and plagiarism
+        level of the give document and prints the result.
+
+        @type  orig_file: string
+        @param orig_file: the path of the original file against which we will be comparing the plagiarised document.
+        @type  plag_file: string
+        @param orig_file: the path of the plagiarised file which we will be comparing.
+        """
         stop_words = stopwords.words('english')
         tokenizer = RegexpTokenizer(r'\w+')
 
